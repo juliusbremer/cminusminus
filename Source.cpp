@@ -1,79 +1,42 @@
 #include <iostream>
-#include <time.h>
 #include <vector>
 
 using namespace std;
 
-void moederneuker()
-{
-	std::cout << "Please enter the amount of random numbers you would like to sort \n No more than 500 !";
-}
-int input()
-{
-	int Length_Of_Array;
-	std::cin >> Length_Of_Array;
-	if (Length_Of_Array > 500)
+int Thanos(int n, std::vector<int> &arr) {
+	if (n > 1)
 	{
-		printf("the number was higher than 500 \n");
-		moederneuker();
-		input();
+		
+		int count = 0;
+		for (int i = 0; i < n - 1; i++)
+		{
+			if (arr[i] <= arr[i + 1]) {
+				count++;
+				if (count == n-1)
+				{
+					return n;
+				}
+			}
+		}
+		n /= 2;
+		Thanos(n, arr);
+
+
+		
+	
 	}
 	else
 	{
-		return Length_Of_Array;
+		return 1;
 	}
 }
-
-vector<int> random(int LengthOf)
-{
-	std::vector<int> DynamicArray;
-	srand(time(NULL));
-	for (int i = 0; i < LengthOf; i++)
-	{
-		int Hello = rand() % 14350 + 1;
-		DynamicArray.push_back(Hello);
-
-	}
-	return DynamicArray;
-}
-
-
-
-void sorting(vector<int> Array1)
-{
-
-	int wissel;
-	int a, b;
-	for (int i = 0; i < Array1.size()-1; i++)
-	{	
-		for (a = 0, b = 1 ; b < Array1.size()-i; a++,b++)
-		{
-			if (Array1[a] > Array1[b])
-			{
-				wissel = Array1[a];
-				Array1[a] = Array1[b];
-				Array1[b] = wissel;
-				
-			}
-		}	
-	}
-	for (int i = 0; i < Array1.size(); i++)
-	{
-		printf("%i \t", Array1[i]);
-	}
-	
-}
-
-
-
 
 int main()
 {
-	
-	moederneuker();
-	vector<int> oke =random(input());
-	sorting(oke);
-	
-	return 0;
-}
+	std::vector<int> Array1{1,2,1,4};
+	int n = 4;
+	int b = Thanos(n, Array1);
+	std::cout << b;
 
+
+}
